@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card {
+            width: 300px;
+            height: 300px;
+            background-color: #eee;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            
+
+        }
+
+        .overlay2 {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0%;
+            left: -100%;
+            background: rgba(0, 0, 0, 0.6);
+            transition: 1s;
+            transition-delay: 600ms;
+
+        }
+
+        .overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: white;
+            transition: 800ms;
+            text-align: justify;
+        
+        }
+
+        .card:hover .overlay {
+            top: 0;
+        }
+
+        .card:hover .overlay2 {
+            left: 0;
+        }
+        p{
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="overlay2"></div>
+        <img width="100%" height="100%" src="pexels-astghik-vardanyan-2160425100-36714705.jpg" alt="">
+        <div class="overlay">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde dolorum deserunt aspernatur quas nostrum
+                adipisci asperiores cupiditate quis nulla, laborum eos debitis recusandae facilis cumque, similique
+                nesciunt in eligendi accusantium.
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta exercitationem 
+            </p>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

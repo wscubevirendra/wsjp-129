@@ -1,0 +1,16 @@
+  .demo {
+      background-color: yellow;
+      color: white;
+      font-size: 50px;
+      text-align: center;
+  }
+
+  .demo2 {
+      color: red;
+  }
+
+  .card {
+      width: 200px;
+      height: 200px;
+      background-color: red !important;
+  }
