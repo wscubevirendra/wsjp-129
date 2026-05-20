@@ -1,0 +1,113 @@
+<script>
+    //Write a program that checks if it’s raining or not and advises whether to take a raincoat.
+    // const isRain = true;
+    // if (isRain) {
+    //     console.log(" take a raincoat")
+    // } else {
+    //     console.log("raincoat is not required")
+    // }
+
+    // const result = isRain == true ? " take a raincoat" : "raincoat is not required"
+
+    // console.log(result)
+
+    // const result = 10 % 2 == 0 ? "Even" : "Odd";
+    // console.log(result)
+
+
+    // const password = "s";
+    // const result = password.length >= 7 ? "Strong" : "weak"
+    // console.log(result)
+
+
+    // let p = 1000;
+    // const rate = 10;
+    // const timeInMonth = 10;
+    // const timeInYear = (timeInMonth / 12) //2
+    // const gender = "male"
+
+
+    // let SI = (p * rate * timeInYear) / 100;  //200
+    // if (timeInYear <= 1 && gender == "male") {
+    //     SI -= (SI * 0.05);   //100
+    // } else {
+    //     SI -= (SI * 0.5);   //100
+
+    // }
+
+    // console.log(p + SI)
+
+
+
+    //     "Write a program to calculate the electricity bill based on the number of units consumed. Use the following conditions for the tariff rates:
+
+    // For the first 100 units: ₹3 per unit.
+    // For the next 200  ₹5 per unit.
+    // For units above 300: ₹10 per unit.
+    // Fixed surcharge: ₹50 added to the total bill."
+
+    //0-100 ---3
+
+    // const unit = Number(prompt("User Electricity bill")); //150
+    // let result = null
+
+    // if (unit <= 0) {
+    //     result = "Invalid"
+    // } else if (unit > 0 && unit <= 100) {
+    //     result = unit * 3
+    // } else if (unit > 100 && unit <= 300) {
+    //     result = 100 * 3 + (unit - 100) * 5
+    // } else {
+    //     result = 100 * 3 + 200 * 5 + (unit - 300) * 10
+    // }
+
+    // alert(`total bill amount ${result + 50} rupes`)
+
+
+    // let num1 = 200;
+    // let num2 = 400;
+    // let num3 = 600;
+
+    // if (num1 > num2 && num1 > num3) {
+    //     console.log("num1")
+    // } else if (num2 > num1 && num2 > num3) {
+    //     console.log("num2")
+    // } else {
+    //     console.log("num3")
+    // }
+
+    //Age and Membership Eligibility-Admitted to the club/You need membership/Too young to enter
+
+    const age = 30;
+    const membership = true;
+
+    if (age >= 18) {
+        if (membership == true) {
+            console.log("admitted to the club")
+        } else {
+            console.log("You need membership")
+        }
+
+    } else {
+        console.log("Too young to enter")
+    }
+
+    if (age >= 18 && membership == true) {
+        console.log("admitted to the club")
+    } else if (age >= 18 && membership == false) {
+        console.log("You need membership")
+    } else {
+        console.log("Too young to enter")
+    }
+
+
+
+
+
+
+
+
+
+
+
+</script>

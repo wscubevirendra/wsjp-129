@@ -1,0 +1,119 @@
+<script>
+    // function greet(name, callback) {
+    //     console.log(first)
+    //     console.log("Hello, " + name);
+    //     callback(); // Executed immediately
+    // }
+
+    // const sayhello = () => console.log("Welcome!")
+
+    // greet("Alice",sayhello);
+
+    // const cart = [
+    //     {
+    //         id: 1,
+    //         product_name: "mobile-phone",
+    //         qty: 1,
+    //         price: 10000
+    //     },
+    //     {
+    //         id: 2,
+    //         product_name: "watch",
+    //         qty: 1,
+    //         price: 200
+    //     },
+    //     {
+    //         id: 3,
+    //         product_name: "Ipad",
+    //         qty: 1,
+    //         price: 2000
+    //     }
+    // ];
+
+
+    // const itemExist = cart.find((item, index) => {
+    //     if (item.id == 10) {
+    //         return item
+    //     }
+    // })
+
+    // console.log(itemExist)
+    // const total = cart.reduce((sum, item) => sum + item.price, sum = 0);
+    // console.log(total)
+
+    // let sum = 0;
+
+    // for (let item of cart) {
+    //     sum += item.price
+
+    // }
+    // console.log(sum)
+
+    const users = [
+        {
+            name: "Ravi Sharma",
+            age: 25,
+            city: "Jaipur",
+            email: "ravi.sharma@gmail.com"
+        },
+        {
+            name: "Pooja Verma",
+            age: 22,
+            city: "Jodhpur",
+            email: "pooja.verma@gmail.com"
+        },
+        {
+            name: "Amit Singh",
+            age: 28,
+            city: "Udaipur",
+            email: "amit.singh@gmail.com"
+        },
+        {
+            name: "Neha Jain",
+            age: 24,
+            city: "Kota",
+            email: "neha.jain@gmail.com"
+        },
+        {
+            name: "Mohit Gupta",
+            age: 30,
+            city: "Ajmer",
+            email: "mohit.gupta@gmail.com"
+        },
+        {
+            name: "Anjali Mehta",
+            age: 21,
+            city: "Bikaner",
+            email: "anjali.mehta@gmail.com"
+        },
+        {
+            name: "Rahul Choudhary",
+            age: 27,
+            city: "Alwar",
+            email: "rahul.choudhary@gmail.com"
+        },
+        {
+            name: "Sneha Rathore",
+            age: 26,
+            city: "Sikar",
+            email: "sneha.rathore@gmail.com"
+        }
+    ];
+
+    //Spread opeartor
+    function printDetails() {
+        users.forEach((user, index) => {
+            console.log(`user name ${user.name} and user age ${user.age}`)
+        })
+    }
+
+    printDetails()
+
+
+    let arr1 = [10, 20];
+    let arr2 = [10, 20];
+    let new= [...arr1, ...arr2]
+
+
+
+</script>

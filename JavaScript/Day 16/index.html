@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="card"><img src="pexels-askar-abayev-5637759.jpg" alt=""></div>
+        <div class="card"><img src="pexels-isaiah-56332-833109.jpg" alt=""></div>
+        <div class="card"><img src="pexels-karola-g-4033622.jpg" alt=""></div>
+        <div class="card"><img src="pexels-karola-g-4033636.jpg" alt=""></div>
+        <div class="card"><img src="pexels-rdne-5737464.jpg" alt=""></div>
+
+    </div>
+
+    <div>
+        <button id="prevBtn"><i class="fa-solid fa-caret-left"></i></button>
+        <button id="nextBtn"><i class="fa-solid fa-caret-right"></i></button>
+    </div>
+
+
+    <script>
+        const cards = document.querySelectorAll(".card");
+        const prevBtn = document.querySelector("#prevBtn");
+        const nextBtn = document.querySelector("#nextBtn");
+
+        let count = 0;
+        nextBtn.addEventListener("click", () => {
+            count++
+
+            if (count > cards.length - 1) {
+                count = 0
+            }
+            console.log(count)
+            cards.forEach((card, index) => {
+                card.style.transform = ` translateX(-${count * 200}%)`
+
+            })
+        });
+
+
+        prevBtn.addEventListener("click", () => {
+
+
+            if (count == 0) {
+                count = cards.length - 1
+            }
+            count--
+
+            cards.forEach((card, index) => {
+                card.style.transform = ` translateX(-${count * 100}%)`
+
+            })
+        })
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>

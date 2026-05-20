@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Introduction</title>
+    <style>
+        .mainText {
+            border: 2px solid red;
+            padding: 20px;
+        }
+
+        .heading {
+            background-color: red;
+            font-size: 60px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHUHeA3BWS6CuWKc5xkir2N8TTybLcxGG8aA&s" alt="">
+    <button onclick="demo()">Best Movie</button>
+
+    <script>
+
+
+        function demo() {
+            const img = document.querySelector("img");
+            img.setAttribute("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkdyvQFDPXIoOEPoKz8mckOIUSWpxhg5eIcw&s")
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

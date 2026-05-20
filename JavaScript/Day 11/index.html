@@ -1,0 +1,24 @@
+<script>
+
+
+
+
+
+    function game() {
+        let x = Math.floor(Math.random() * 7);
+        let num = Number(prompt("Any Number from 0-6"))
+        console.log(num)
+        if (x === num) {
+            alert("Won")
+        } else {
+            alert("Re-try")
+            game()
+        }
+
+    }
+
+    
+
+    game()
+
+</script>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 800px;
+            min-height: 500px;
+            /* border: 2px solid black; */
+            margin: 20px auto;
+        }
+
+        .accordion-container {
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            padding: 10px;
+        }
+
+        .accord-title {
+            color: gray;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 4px;
+        }
+
+        .accord-title:hover {
+            background: #ff7b00;
+            color: white;
+
+        }
+
+        .accord-content {
+            text-align: justify;
+            height: 0;
+            overflow: hidden;
+            transition: 300ms;
+        }
+
+        .open {
+            padding-top: 10px;
+            border-top: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="accordion-container">
+            <div class="accord-title">
+                <h2>What are the advantages of bus ticket booking with redBus?</h2>
+            </div>
+            <div class="accord-content">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus similique aspernatur voluptatibus
+                    pariatur ipsa, molestias explicabo odit, ducimus voluptas quibusdam officiis voluptate blanditiis
+                    neque quam nostrum architecto quis incidunt fugit!
+                </p>
+            </div>
+        </div>
+        <div class="accordion-container">
+            <div class="accord-title">
+                <h2>Why book bus tickets online on redBus?</h2>
+            </div>
+            <div class="accord-content">
+                <p>
+                    Booking bus tickets online on redBus is increasingly becoming the preferred choice for travellers
+                    due to its numerous advantages over traditional methods. With redBus, customers can book their bus
+                    tickets effortlessly from the comfort of their homes, avoiding the inconvenience of standing in long
+                    lines at bus stations or travel agencies. Online bus booking offers the luxury of comparing
+                    different bus schedules and operators and presents various discount offers and exclusive deals,
+                    resulting in significant savings. Payment security is another notable feature of online booking,
+                    which ensures that your financial information is well-protected against fraud. Additionally,
+                    customers can pick their seats, providing a customized travel experience. Online bus booking
+                    platforms give real-time updates about any changes in the bus timetable, including delays or
+                    cancellations, enabling better planning. The convenience doesn't stop here; travellers can even
+                    compare onboard amenities like charging points or snacks, further enhancing the travel experience.
+                </p>
+            </div>
+        </div>
+        <div class="accordion-container">
+            <div class="accord-title">
+                <h2>Do I need to create an account on the redBus site to book bus ticket?</h2>
+            </div>
+            <div class="accord-content">
+                <p>
+                    No, you don’t have to create an account on the redBus site to book bus ticket. But it is advisable
+                    to make one to accelerate the process next time you want to book bus tickets. Also, redBus has many
+                    discounts and bus booking offers that you can easily access if you have an account with us.
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion-container">
+            <div class="accord-title">
+                <h2>Do I need to create an account on the redBus site to book bus ticket?</h2>
+            </div>
+            <div class="accord-content">
+                <p>
+                    No, you don’t have to create an account on the redBus site to book bus ticket. But it is advisable
+                    to make one to accelerate the process next time you want to book bus tickets. Also, redBus has many
+                    discounts and bus booking offers that you can easily access if you have an account with us.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var accordion_titles = document.querySelectorAll(".accord-title");
+
+        for (let title of accordion_titles) {
+            title.addEventListener("click", function () {
+                let accordContent = title.nextElementSibling;
+                let openContent = document.querySelector(".open");
+           
+                if (openContent != null) {
+                    openContent.classList.remove("open");
+                    openContent.style = ""
+                }
+
+             //   if (openContent == accordContent) return
+                accordContent.classList.add("open")
+                accordContent.style.height = accordContent.scrollHeight + 10 + 'px'
+                accordContent.style.overflow = ""
+
+            })
+        }
+    </script>
+</body>
+
+</html>

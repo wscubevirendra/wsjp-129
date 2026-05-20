@@ -1,0 +1,63 @@
+<script>
+    // const age = 20;
+    // if (age >= 18) {
+    //     console.log("You can vote");
+    // } else {
+    //     console.log("You can not vote");
+    // }
+
+    // console.log("End")
+
+    // const num = prompt("Any number....");  //10
+
+
+
+
+
+    // if (num > 0) {
+    //     console.log("number is positive")
+    // } else if (num < 0) {
+    //     console.log("number is negative")
+    // } else {
+    //     console.log("number is zero")
+    // }
+
+    // const perc = 20;
+    // if (perc > 100 || perc < 0) {
+    //     console.log("Invalid")
+    // }
+    // else if (perc >= 90 && perc <= 100) {
+    //     console.log("A+")
+    // } else if (perc >= 80) {
+    //     console.log("A")
+    // } else if (perc >= 60) {
+    //     console.log("B")
+    // } else if (perc >= 40) {
+    //     console.log("C")
+    // } else if (perc >= 33) {
+    //     console.log("D")
+    // } else {
+    //     console.log("Fail")
+    // }
+
+
+    //Create a program that determines if a CIBIL score is excellent, good, average, or poor based on given ranges.
+
+    const cibilScore = prompt("Your CIBIL SCORE");
+    let result = ""
+    if (cibilScore < 300 || cibilScore > 900) {
+        result = "Invalid cibil Score";
+    } else if (cibilScore >= 750) {
+        result = " CIBIL score is excellent";
+    } else if (cibilScore >= 650) {
+        result = " CIBIL score is good";
+    } else if (cibilScore >= 550) {
+        result = " CIBIL score is average";
+    } else {
+        result = "CIBIL score is poor";
+    }
+
+   alert(result)
+
+
+</script>

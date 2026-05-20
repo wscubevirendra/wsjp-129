@@ -1,0 +1,101 @@
+<script>
+    //Create a traffic light system, displaying appropriate message using function ('red', 'green', 'yellow').
+    // function printMessage(color) {
+    //     let message = '';
+    //     color = color.toLowerCase()
+    //     if (color === "red") {
+    //         message = "Stop";
+    //     } else if (color === "green") {
+    //         message = "Go";
+    //     } else if (color == "yellow") {
+    //         message = "Wait (Slow)";
+    //     } else {
+    //         message = "Invalid input value"
+    //     }
+
+    //     console.log(message)
+    // }
+
+    // printMessage("RED");
+
+
+
+    // function that determines the quadrant for a given point
+
+
+    // function quadrant(x, y) {
+    //     let result = "";
+
+    //     if (x > 0 && y > 0) {
+    //         result = "I Quadrant";
+    //     } else if (x < 0 && y > 0) {
+    //         result = "II Quadrant";
+    //     } else if (x < 0 && y < 0) {
+    //         result = "III Quadrant";
+    //     } else if (x > 0 && y < 0) {
+    //         result = "IV Quadrant";
+    //     } else if (x === 0 && y != 0) {
+    //         result = "Y-axis";
+    //     } else if (x !== 0 && y == 0) {
+    //         result = "X-axis";
+    //     } else if (x == 0 && y == 0) {
+    //         result = "Main Axis";
+    //     } else {
+    //         result = "Invalid input"
+    //     }
+
+    //     console.log(result)
+    // }
+
+
+    // quadrant(2, 2)
+    // quadrant(-2, 2)
+
+
+    // function print_time_status(time) {
+    //     if ((time >= 0 && time < 5) || (time >= 21 && time < 24)) {
+    //         console.log("Night")
+    //     }else if(){
+
+    //     }
+
+    // }
+
+    // print_time_status(22)
+
+    //Count how many times the value appears in the array.
+
+    function count_appears(array) {
+        let num = Number(prompt("number:-"));
+        let count = 0;
+        for (const element of array) {
+            if (element == num) {
+                count++
+            }
+        }
+
+        console.log(count)
+
+    }
+
+    // count_appears([10, 20, 30, 10, 20],)
+
+    //Create a function to remove a specified element from an array.
+    //[10,20,30,40]
+    function removeElement(array) {
+        let remove_element = Number(prompt("Remove Element:-")); //10
+        const newArray = [];
+        for (const num of array) {
+            if (num !== remove_element) {
+                console.log(num !== remove_element)
+                newArray.push(num);
+            }
+        }
+
+        console.log(newArray)
+
+    }
+
+    removeElement([10, 20, 30, 40, 50, 10])
+
+</script>
