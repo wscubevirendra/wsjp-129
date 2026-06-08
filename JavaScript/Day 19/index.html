@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .card {
+            width: 300px;
+            padding: 16px;
+            box-shadow: 0px 0px 2px gray;
+            background-color: gold;
+            margin: 50px auto;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        button {
+            padding: 2px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <button>Start</button>
+        <h2>0</h2>
+        <button disabled>Stop</button>
+
+    </div>
+
+    <script>
+        const btn = document.querySelectorAll("button");
+        const h2 = document.querySelector("h2");
+        let count = 0;
+        let myInterval = null;
+
+
+
+        btn[0].addEventListener("click", (event) => {
+            myInterval = setInterval(() => {
+                count++;
+                h2.innerText = count
+
+            }, 1000);
+
+            btn[0].disabled = true
+            btn[1].disabled = false
+
+        })
+
+        btn[1].addEventListener("click", () => {
+            clearInterval(myInterval);
+
+            btn[0].disabled = false
+            btn[1].disabled = true
+
+
+
+        })
+    </script>
+
+</body>
+
+</html>

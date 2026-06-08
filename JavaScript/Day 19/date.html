@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            width: 300px;
+            padding: 16px;
+            box-shadow: 0px 0px 2px gray;
+            background-color: gold;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        ul {
+            display: flex;
+            gap: 10px;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <ul class="weak">
+          
+        </ul>
+        <h1></h1>
+    </div>
+
+    <script>
+        const h1 = document.querySelector("h1")
+        const weak = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",]
+
+
+        setInterval(() => {
+            const now = new Date();
+
+            let h = now.getHours();
+            let m = now.getMinutes();
+            let s = now.getSeconds();
+
+            if (h > 12) {
+                h = h - 12
+            }
+
+            m = m > 10 ? m : "0" + m
+            s = s > 10 ? s : "0" + s
+            h = h > 10 ? h : "0" + h
+
+            h1.innerHTML = `${h} : ${m} : ${s}`
+
+
+
+        }, 1000);
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>
