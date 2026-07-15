@@ -1,0 +1,84 @@
+   body {
+            background-color: #141414;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .navbar-brand {
+            color: #e50914 !important;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .search-section {
+            padding: 40px 0;
+        }
+
+        .form-control {
+            background-color: #222;
+            border: 1px solid #333;
+            color: white;
+        }
+
+        .form-control:focus {
+            background-color: #222;
+            color: white;
+            border-color: #e50914;
+            box-shadow: none;
+        }
+
+        .btn-netflix {
+            background-color: #e50914;
+            color: white;
+            border: none;
+        }
+
+        .btn-netflix:hover {
+            background-color: #c40812;
+        }
+
+        .movie-card {
+            background-color: #1f1f1f;
+            border: none;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.03);
+        }
+
+        .movie-card img {
+            height: 360px;
+            object-fit: cover;
+        }
+
+        .card-title {
+            color: white;
+        }
+
+        .card-text {
+            color: #b3b3b3;
+        }
+
+        .rating {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-body {
+            position: absolute;
+            bottom: -100%;
+            transition: 400ms;
+            /* background-color: white; */
+
+        }
+
+        .card:hover .card-body {
+            bottom: 0;
+        }

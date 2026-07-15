@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function Form() {
+export default function Form({ addUser }) {
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -32,7 +32,7 @@ export default function Form() {
     function submitHandler(e) {
         e.preventDefault();
         if (validation()) {
-            alert("Form Submit")
+            addUser(user)
             setError(null);
             setUser({});
         }
