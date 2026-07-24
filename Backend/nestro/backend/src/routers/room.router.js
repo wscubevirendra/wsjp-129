@@ -1,12 +1,13 @@
 import express from "express";
 const router = express.Router();
-import { read, readById, create, updateStatus, update, deleteById } from "../controllers/room.controller.js"
+import { read, readById, create, updateStatus, edit, deleteById } from "../controllers/room.controller.js"
+import upload from "../middleware/upload.js";
 
 router.get("/", read);
 router.get("/:id", readById);
-router.post("/create", create);
+router.post("/create", upload.single("image"), create);
 router.patch("/status-update/:id", updateStatus);
-router.put("/update/:id", update);
+router.put("/edit/:id",upload.single("image"), edit);
 router.delete("/delete/:id", deleteById);
 
 

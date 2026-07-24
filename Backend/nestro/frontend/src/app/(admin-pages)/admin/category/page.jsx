@@ -9,10 +9,10 @@ import { fetchCategory } from "@/api/api";
 
 
 export default async function Page() {
-    const { success, data } = await fetchCategory();
+    const { success, data,message } = await fetchCategory();
 
-    if (success === false) {
-        return <h2>Internal Server Error</h2>
+    if (success == false) {
+        throw new Error("Internal Server Error")
     }
 
     return (
@@ -55,8 +55,8 @@ export default async function Page() {
                                         {item.image ? (
 
                                             <img
-                                                src={category.image}
-                                                alt={category.name}
+                                                src={item.image}
+                                                alt={item.name}
                                                 className="w-12 h-12 rounded-lg object-cover"
                                             />
 
@@ -85,7 +85,7 @@ export default async function Page() {
                                         <StatusBadge status={item.status} path={`category/status-update/${item._id}`} />
                                     </td>
                                     <td className="px-6 py-4">
-                                        <EditButton module="category" />
+                                        <EditButton path={`/admin/category/edit/${item._id}`} />
                                     </td>
                                     <td className="px-6 py-4">
                                         <DeleteButton path={`category/delete/${item._id}`} />

@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import cors from "cors"
 import categoryRouter from "./routers/category.router.js"
-import roomRouter from "./routers/room.router.js"
+import roomRouter from "./routers/room.router.js";
+import productRouter from "./routers/product.router.js";
 dotenv.config();
 const app = express();
 // Database Connection
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/category", categoryRouter);
 app.use("/api/room-type", roomRouter);
+app.use("/api/product", productRouter);
 
 // Server
 const PORT = process.env.PORT || 5000;

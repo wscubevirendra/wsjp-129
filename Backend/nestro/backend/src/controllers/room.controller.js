@@ -1,75 +1,124 @@
-import RoomModel from "../models/category.model.js";
+import RoomModel from "../models/room.model.js";
+import {
+  sendBadRequest,
+  sendConflict,
+  sendCreated,
+  sendNotFound,
+  sendServerError,
+  sendSuccess,
+} from "../utils/response.js";
 
+export const read = async (req, res) => {
+  try {
+    const rooms = await RoomModel.find();
+    const countDocument = await RoomModel.countDocuments();
 
+    res.status(200).json({
+      message: "Room data found",
+      success: true,
+      data: rooms,
+      total: countDocument,
+    });
+  } catch (error) {
+    sendServerError(res);
+  }
+};
 
-export const read = (req, res) => {
-    try {
+export const readById = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-    } catch (error) {
-        res.status(500).json({
-            message: "Internal server error",
-            success: false
-        })
-    }
+    const room = await RoomModel.findById(id);
 
-}
+    if (!room) return sendNotFound(res);
 
-export const readById = (req, res) => {
-    try {
+    res.status(200).json({
+      message: "Room data found",
+      success: true,
+      data: room,
+    });
+  } catch (error) {
+    sendServerError(res);
+  }
+};
 
-    } catch (error) {
-        res.status(500).json({
-            message: "Internal server error",
-            success: false
-        })
-    }
+export const create = async (req, res) => {
+  try {
+    const imageUrl = req.file?.path || "";
+    const { name, slug } = req.body;
 
-}
+    if (!name || !slug) return sendBadRequest(res);
 
-export const create = (req, res) => {
-    try {
+    const room = await RoomModel.findOne({ slug });
 
-    } catch (error) {
-        res.status(500).json({
-            message: "Internal server error",
-            success: false
-        })
-    }
+    if (room) return sendConflict(res);
 
-}
+    await RoomModel.create({
+      name,
+      slug,
+      image: imageUrl,
+    });
 
-export const updateStatus = (req, res) => {
-    try {
+    return sendCreated(res);
+  } catch (error) {
+    sendServerError(res);
+  }
+};
 
-    } catch (error) {
-        res.status(500).json({
-            message: "Internal server error",
-            success: false
-        })
-    }
+export const updateStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-}
+    const room = await RoomModel.findById(id);
 
-export const update = (req, res) => {
-    try {
+    if (!room) return sendNotFound(res);
 
-    } catch (error) {
-        res.status(500).json({
-            message: "Internal server error",
-            success: false
-        })
-    }
+    await RoomModel.findByIdAndUpdate(id, {
+      $set: {
+        status: !room.status,
+      },
+    });
 
-}
+    return sendSuccess(res, "Room status updated");
+  } catch (error) {
+    sendServerError(res);
+  }
+};
 
-export const deleteById = (req, res) => {
-    try {
+export const edit = async (req, res) => {
+  try {
+    const imageUrl = req.file?.path || "";
+    const { name, slug } = req.body;
+    const { id } = req.params;
 
-    } catch (error) {
-        res.status(500).json({
-            message: "Internal server error",
-            success: false
-        })
-    }
+    const room = await RoomModel.findById(id);
 
-}
+    if (!room) return sendNotFound(res);
+
+    if (name) room.name = name;
+    if (slug) room.slug = slug;
+    if (imageUrl) room.image = imageUrl;
+
+    await room.save();
+
+    return sendSuccess(res, "Room updated successfully");
+  } catch (error) {
+    sendServerError(res);
+  }
+};
+
+export const deleteById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const room = await RoomModel.findById(id);
+
+    if (!room) return sendNotFound(res);
+
+    await RoomModel.findByIdAndDelete(id);
+
+    return sendSuccess(res, "Room deleted successfully");
+  } catch (error) {
+    sendServerError(res);
+  }
+};

@@ -4,14 +4,15 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Tag, Link2, Save } from 'lucide-react';
 import { client, generateSlug } from '@/utils/helper';
-import {  toast } from 'sonner'
+import { toast } from 'sonner'
 import { useRouter } from 'next/navigation';
 
 export default function AddCategoryPage() {
-    const router=useRouter()
+    const router = useRouter()
     const [formData, setFormData] = useState({
         name: '',
         slug: '',
+        image: ''
     });
 
     const handleChange = ({ target }) => {
@@ -25,15 +26,24 @@ export default function AddCategoryPage() {
         }));
     };
 
+
+    const imageHanlder = (event) => {
+        setFormData({ ...formData, image: event.target.files[0] })
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await client.post("category/create", formData);
+            const payload = new FormData();
+            payload.append("name", formData.name);
+            payload.append("slug", formData.slug);
+            payload.append("image", formData.image);
+            const response = await client.post("category/create", payload);
             if (response.data.success) {
                 toast.success(response.data.message);
                 setFormData({
-                    name:"",
-                    slug:""
+                    name: "",
+                    slug: ""
                 })
                 router.push("/admin/category")
             }
@@ -116,8 +126,13 @@ export default function AddCategoryPage() {
                         <label className="text-sm font-semibold text-gray-800">
                             Category Image
                         </label>
+                        <input type="file" name="image" onChange={imageHanlder} className="flex w-full items-center justify-center h-20 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50" />
 
-                        <div className="flex items-center justify-center h-20 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50">
+                        <div >
+                            {
+                                formData.image &&
+                                <img src={URL.createObjectURL(formData.image)} className='w-20 h-10' alt="" />
+                            }
                             <p className="text-sm text-gray-400">
                                 Image upload will be added later
                             </p>

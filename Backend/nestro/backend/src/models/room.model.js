@@ -24,5 +24,5 @@ const schema = new mongoose.Schema({
     }
 )
 
-const RoomModel = mongoose.model("categories", schema);
+const RoomModel = mongoose.model("rooms", schema);
 export default RoomModel;

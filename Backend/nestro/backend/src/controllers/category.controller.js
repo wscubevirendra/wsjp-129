@@ -32,7 +32,7 @@ export const readById = async (req, res) => {
         res.status(200).json({
             message: "Category data found",
             success: true,
-            data:category
+            data: category
         });
 
 
@@ -45,11 +45,12 @@ export const readById = async (req, res) => {
 
 export const create = async (req, res) => {
     try {
+        const imageUrl = req.file?.path || ""
         const { name, slug } = req.body;
         if (!name || !slug) return sendBadRequest(res)
         const category = await CategoryModel.findOne({ slug });
         if (category) return sendConflict(res)
-        await CategoryModel.create({ name, slug })
+        await CategoryModel.create({ name, slug, image: imageUrl })
         return sendCreated(res)
 
     } catch (error) {
@@ -64,8 +65,8 @@ export const updateStatus = async (req, res) => {
 
         if (!category) return sendNotFound(res)
 
-        await CategoryModel.findByIdAndUpdate({_id:id},{$set:{status:!category.status}});
-        return sendSuccess(res,"Category Status update");
+        await CategoryModel.findByIdAndUpdate({ _id: id }, { $set: { status: !category.status } });
+        return sendSuccess(res, "Category Status update");
 
 
 
@@ -76,25 +77,36 @@ export const updateStatus = async (req, res) => {
 
 }
 
-export const update = (req, res) => {
+export const edit = async (req, res) => {
     try {
-
-    } catch (error) {
-        sendServerError(res)
-
-    }
-
-}
-
-export const deleteById =async (req, res) => {
-    try {
-         const { id } = req.params;
+        const imageUrl = req.file?.path || ""
+        const { name, slug } = req.body;
+        const { id } = req.params;
         const category = await CategoryModel.findById(id);
-
         if (!category) return sendNotFound(res)
 
+        if (name) category.name = name
+        if (slug) category.slug = slug
+        if (imageUrl) category.image = imageUrl
+
+        await category.save();
+        sendSuccess(res,"Category Edit")
+    } catch (error) {
+        sendServerError(res)
+
+    }
+
+}
+
+export const deleteById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const category = await CategoryModel.findById(id);
+        if (!category) return sendNotFound(res)
+
+
         await CategoryModel.findByIdAndDelete(id)
-        return sendSuccess(res,"Category delete successfully");
+        return sendSuccess(res, "Category delete successfully");
 
 
     } catch (error) {
