@@ -10,6 +10,9 @@ import {
     Images,
     Eye,
 } from 'lucide-react';
+import { client } from '@/utils/helper';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner'
 
 export default function ActionDropdown({
     id,
@@ -17,6 +20,7 @@ export default function ActionDropdown({
     actions = [],
 }) {
 
+    const router=useRouter()
     const [open, setOpen] = useState(false);
 
     const dropdownRef = useRef(null);
@@ -41,30 +45,42 @@ export default function ActionDropdown({
     }, []);
 
     const actionConfig = {
-        edit: {
-            label: 'Edit',
+        BestSeller: {
+            label: 'BestSeller',
             icon: Pencil,
             className: 'text-gray-700',
-            onClick: () => {
-                console.log(`Edit ${module}`, id);
+            onClick: async () => {
+                try {
+                    const response = await client.patch(`${module}/update-flag/${id}`, { field: "bestSeller" });
+
+                    if (response.data.success) {
+                        toast.success(response.data.message);
+                        router.refresh()
+                    }
+
+                } catch (error) {
+                    toast.error(error.response.data.message || "Internal server error")
+
+                }
             },
         },
+         stock: {
+            label: 'stock',
+            icon: Pencil,
+            className: 'text-gray-700',
+            onClick: async () => {
+                try {
+                    const response = await client.patch(`${module}/update-flag/${id}`, { field: "stock" });
 
-        status: {
-            label: 'Toggle Status',
-            icon: ToggleLeft,
-            className: 'text-blue-600',
-            onClick: () => {
-                console.log(`Status ${module}`, id);
-            },
-        },
+                    if (response.data.success) {
+                        toast.success(response.data.message);
+                        router.refresh()
+                    }
 
-        delete: {
-            label: 'Delete',
-            icon: Trash2,
-            className: 'text-red-600',
-            onClick: () => {
-                console.log(`Delete ${module}`, id);
+                } catch (error) {
+                    toast.error(error.response.data.message || "Internal server error")
+
+                }
             },
         },
 
@@ -73,24 +89,16 @@ export default function ActionDropdown({
             icon: ImagePlus,
             className: 'text-green-600',
             onClick: () => {
-                console.log(`Images ${module}`, id);
+               router.push(`/admin/product/add-images/${id}`)
             },
         },
 
-        gallery: {
-            label: 'Gallery',
-            icon: Images,
-            className: 'text-purple-600',
-            onClick: () => {
-                console.log(`Gallery ${module}`, id);
-            },
-        },
 
         view: {
             label: 'View',
             icon: Eye,
             className: 'text-orange-600',
-            onClick: () => {
+            onClick: async () => {
                 console.log(`View ${module}`, id);
             },
         },
@@ -110,15 +118,10 @@ export default function ActionDropdown({
 
             {open && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl border border-gray-100 shadow-lg overflow-hidden z-50">
-
                     {actions.map((action) => {
-
                         const item = actionConfig[action];
-
                         if (!item) return null;
-
                         const Icon = item.icon;
-
                         return (
                             <button
                                 key={action}
@@ -126,8 +129,7 @@ export default function ActionDropdown({
                                     item.onClick();
                                     setOpen(false);
                                 }}
-                                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition"
-                            >
+                                className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition">
                                 <Icon
                                     className={`w-4 h-4 ${item.className}`}
                                 />

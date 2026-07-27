@@ -1,7 +1,6 @@
 import ProductModel from "../models/product.model.js";
 import { sendBadRequest, sendConflict, sendCreated, sendNotFound, sendServerError, sendSuccess } from "../utils/response.js";
 
-
 export const read = async (req, res) => {
     try {
 
@@ -78,6 +77,7 @@ export const create = async (req, res) => {
         ) {
             return sendBadRequest(res);
         }
+        console.log(req.body)
 
         const product = await ProductModel.findOne({ slug });
 
@@ -106,6 +106,44 @@ export const create = async (req, res) => {
 
     } catch (error) {
         sendServerError(res);
+    }
+};
+
+import Product from "../models/product.model.js";
+
+export const addImages = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const product = await Product.findById(id);
+
+        if (!product) return sendNotFound(res)
+
+        // Existing Images
+        const oldImages = product.images || [];
+
+        // Newly Uploaded Images
+        const newImages = req.files?.map((file) => file.path) || [];
+
+        // Merge Old + New
+        const updatedImages = [...oldImages, ...newImages];
+
+        // Maximum 6 Images
+        if (updatedImages.length > 6) {
+            return res.status(400).json({
+                success: false,
+                message: "Maximum 6 images are allowed.",
+            });
+        }
+
+        product.images = updatedImages;
+
+        await product.save();
+
+        return sendSuccess(res)
+    } catch (error) {
+        console.error(error);
+        return sendServerError(res)
     }
 };
 
@@ -182,8 +220,8 @@ export const updateFlag = async (req, res) => {
     try {
 
         const { id } = req.params;
-        const { field } = req.body;  
-
+        const { field } = req.body;
+        console.log(id, field)
         const allowedFields = [
             "stock",
             "featured",

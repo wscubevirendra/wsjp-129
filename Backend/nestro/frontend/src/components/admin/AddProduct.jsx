@@ -1,13 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { generateSlug, client } from "@/utils/helper";
-import { fetchCategory, fetchRooms } from "@/api/api";
-import { toast } from 'sonner';
-import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 export default function AddProduct() {
-    const router = useRouter();
+
     const initialState = {
         title: "",
         slug: "",
@@ -41,40 +37,17 @@ export default function AddProduct() {
     };
 
     const [data, setData] = useState(initialState);
+
     const [preview, setPreview] = useState("");
-    const [category, setCategory] = useState([]);
-    const [room, setRooms] = useState([]);
 
-    useEffect(
-        () => {
-            const fetchAPI = async () => {
-                try {
-
-                    const [category_response, room_response] = await Promise.all([
-                        await fetchCategory(),
-                        await fetchRooms()
-                    ])
-                    if (category_response.success) {
-                        setCategory(category_response.data)
-                    }
-                    console.log(room_response)
-                    if (room_response.success) {
-                        setRooms(room_response.data)
-                    }
-
-
-                } catch (error) {
-
-                }
-
-            }
-
-            fetchAPI()
-        },
-        []
-    )
-
-
+    // Auto Slug
+    const generateSlug = (value) => {
+        return value
+            .toLowerCase()
+            .trim()
+            .replace(/[^\w\s-]/g, "")
+            .replace(/\s+/g, "-");
+    };
 
     // Text / Number / Select
     const handleChange = (e) => {
@@ -113,54 +86,19 @@ export default function AddProduct() {
         }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const payload = new FormData();
-
-        Object.keys(data).forEach((key) => {
-            payload.append(key, data[key])
-        })
-        try {
-            const response = await client.post("product/create", payload);
-            if (response.data.success) {
-                toast.success(response.data.message);
-                router.push("/admin/product")
-            }
-
-        }
-        catch (error) {
-            toast.error(error.response.data.message || "Internal server error")
-        }
-
+        console.log(data);
     };
 
-
-    useEffect(
-        () => {
-
-            const price = parseInt(data.price);
-            const sale_price = parseInt(data.salePrice);
-
-            const discount = Math.round((price - sale_price) / price * 100);
-            setData((prev) => {
-                return {
-                    ...prev,
-                    discount
-                }
-            })
-
-        },
-        [data.salePrice, data.price]
-    )
-
     const inputClass =
-        "w-full border border-white/10 bg-white text-black placeholder-gray-500 rounded-lg px-4 py-3 outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition";
+        "w-full border border-white/10 bg-[#132437] text-white placeholder-gray-500 rounded-lg px-4 py-3 outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition";
 
     return (
 
-        <div className="max-w-7xl mx-auto p-8  text-black min-h-screen">
+        <div className="max-w-7xl mx-auto p-8 bg-[#0d1b2a] text-white min-h-screen">
 
-            <div className="bg-[#1a2e43] shadow border border-white/10 rounded-xl">
+            <div className="bg-[#112436] border border-white/10 rounded-xl">
 
                 <div className="border-b border-white/10 p-6">
 
@@ -257,7 +195,7 @@ export default function AddProduct() {
 
                     </section>
 
-                    {/* Category */}
+                                        {/* Category */}
 
                     <section>
 
@@ -281,12 +219,12 @@ export default function AddProduct() {
                                 >
                                     <option value="" className="bg-[#132437]">Select Category</option>
 
+                                    {/* Map Category Here */}
 
-
-
+                                    {/*
 
                                     {
-                                        category.map(category => (
+                                        categories.map(category=>(
                                             <option
                                                 key={category._id}
                                                 value={category._id}
@@ -296,7 +234,7 @@ export default function AddProduct() {
                                         ))
                                     }
 
-
+                                    */}
 
                                 </select>
 
@@ -314,16 +252,11 @@ export default function AddProduct() {
                                     onChange={handleChange}
                                     className={inputClass}
                                 >
-                                    {
-                                        room.map(room => (
-                                            <option
-                                                key={room._id}
-                                                value={room._id}
-                                            >
-                                                {room.name}
-                                            </option>
-                                        ))
-                                    }
+                                    <option value="" className="bg-[#132437]">
+                                        Select Room Type
+                                    </option>
+
+                                    {/* Map Room Types */}
 
                                 </select>
 
@@ -531,7 +464,7 @@ export default function AddProduct() {
                         </div>
 
                     </section>
-                    {/* Thumbnail */}
+                                        {/* Thumbnail */}
 
                     <section>
 

@@ -1,5 +1,37 @@
 import { client } from "@/utils/helper"
 
+
+export const fetchProducts = async () => {
+    try {
+        const response = await client.get("product");
+        if (response.data.success) {
+           return response.data
+        }
+    } catch (error) {
+        return {
+            data: [],
+            success: false,
+            message:"Internal Server Error"
+        }
+    }
+}
+
+
+export const fetchProductById = async (id) => {
+    try {
+        const response = await client.get(`product/${id}`);
+        if (response.data.success) {
+           return response.data
+        }
+    } catch (error) {
+        return {
+            data: {},
+            success: false,
+            message:"Internal Server Error"
+        }
+    }
+}
+
 export const fetchCategory = async () => {
     try {
         const response = await client.get("category");
