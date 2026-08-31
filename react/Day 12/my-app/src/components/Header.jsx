@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function Header() {
     const pathname = usePathname();
+    const cart=useSelector((store)=>store.cart)
 
     const navItems = [
         {
@@ -57,7 +59,7 @@ export default function Header() {
 
                 {/* Button */}
                 <button className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-lg transition">
-                    Login
+                    {cart.data.length || 0}
                 </button>
             </div>
         </header>

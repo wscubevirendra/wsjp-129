@@ -5,13 +5,14 @@ import cors from "cors"
 import categoryRouter from "./routers/category.router.js"
 import roomRouter from "./routers/room.router.js";
 import productRouter from "./routers/product.router.js";
+import userRouter from "./routers/user.router.js";
 dotenv.config();
 const app = express();
 // Database Connection
 connectDB();
 
 // Middlewares
-app.use(cors({ origin: "http://localhost:3000" }))
+app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 app.use("/api/category", categoryRouter);
 app.use("/api/room-type", roomRouter);
 app.use("/api/product", productRouter);
+app.use("/api/user", userRouter);
 
 // Server
 const PORT = process.env.PORT || 5000;

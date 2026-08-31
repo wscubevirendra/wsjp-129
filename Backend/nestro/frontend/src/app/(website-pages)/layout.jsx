@@ -1,7 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
-import Header from "@website/Header";
-import Footer from "@website/Footer";
+import Header from "@website/layout/Navbar";
+import Footer from "@website/layout/Footer";
+import StoreProvider from "@/redux/StoreProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,10 +26,14 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body >
-        <Header/>
-        {children}
-        <Footer/>
-        </body>
-    </html>
+        <StoreProvider>
+          <Header />
+          {children}
+          <Footer />
+        </StoreProvider>
+      </body>
+
+
+    </html >
   );
 }

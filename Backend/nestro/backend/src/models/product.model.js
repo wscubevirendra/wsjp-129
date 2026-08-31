@@ -27,12 +27,12 @@ const productSchema = new mongoose.Schema(
     },
 
     // Category
-    category: {
+    categoryId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "categories",
       required: true,
     },
-    roomType: {
+    roomId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "rooms",
       required: true,

@@ -5,7 +5,14 @@ import { sendBadRequest, sendConflict, sendCreated, sendNotFound, sendServerErro
 
 export const read = async (req, res) => {
     try {
-        const category = await CategoryModel.find();
+        const query = req.query;
+        const filter = {};
+        const limit = query.limit ? parseInt(query.limit) : 0;
+        if (query.status) {
+            filter.status = query.status === "true"
+        }
+        const category = await CategoryModel.find()
+        console.log(category)
         const countDocument = await CategoryModel.countDocuments()
         res.status(200).json({
             message: "Category data found",
@@ -90,7 +97,7 @@ export const edit = async (req, res) => {
         if (imageUrl) category.image = imageUrl
 
         await category.save();
-        sendSuccess(res,"Category Edit")
+        sendSuccess(res, "Category Edit")
     } catch (error) {
         sendServerError(res)
 

@@ -13,8 +13,7 @@ export default function StoreContext({ children }) {
             })
             setCart(updateCart)
         } else {
-            setCart([...cart, product])
-                ;
+            setCart([...cart, product]) ;
         }
 
     }

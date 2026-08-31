@@ -49,7 +49,7 @@ export default function AddCategoryPage() {
             }
 
         } catch (error) {
-            toast.error(error.response.data.message || "Internal server error")
+            toast.error( "Internal server error")
         }
 
     };

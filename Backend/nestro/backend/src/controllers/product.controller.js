@@ -1,21 +1,82 @@
 import ProductModel from "../models/product.model.js";
+import CategoryModel from "../models/category.model.js";
+import RoomModel from "../models/room.model.js";
 import { sendBadRequest, sendConflict, sendCreated, sendNotFound, sendServerError, sendSuccess } from "../utils/response.js";
 
 export const read = async (req, res) => {
     try {
+        const query = req.query;
+        const filter = {};
+        const sortFilter = {};
+        const limit = query.limit ? parseInt(query.limit) : 2;
+        const page = query.page || 1
+        const skip = (page - 1) * limit;
+        if (query.best_seller) {
+            filter.bestSeller = query.best_seller === "true"
+        }
 
-        const product = await ProductModel.find()
+        if (query.status) {
+            filter.status = query.status === "true"
+        }
+        if (query.stock) {
+            filter.stock = query.stock === "true"
+        }
 
+        if (query.new_arrival) {
+            filter.newArrival = query.new_arrival === "true"
+        }
+
+        if (query.id) {
+            filter._id = query.id
+        }
+
+        if (query.sort) {
+            if (query.sort == "asc") {
+                sortFilter.salePrice = 1
+            } else if (query.sort == "dsc") {
+                sortFilter.salePrice = -1
+            }
+        } else {
+            sortFilter.createdAt = 1
+        }
+
+        // { room: 'living-room,dining-room' }
+        if (query.category) {
+            const categoryArray = query.category.split(",");
+            //slug to id
+            const category = await CategoryModel.find({ slug: { $in: categoryArray } }).select("_id");
+            filter.categoryId = { $in: category.map((c) => c._id) };
+        }
+
+        if (query.room) {
+            const roomArray = query.room.split(",");
+            //slug to id
+            const room = await RoomModel.find({ slug: { $in: roomArray } }).select("_id");
+            filter.roomId = { $in: room.map((r) => r._id) };
+        }
+
+        if (query.min_price && query.max_price) {
+            const min_price = parseInt(query.min_price);
+            const max_price = parseInt(query.max_price);
+            filter.salePrice = { $gte: min_price, $lte: max_price }
+        }
+
+
+        console.log(filter)
+        const product = await ProductModel.find(filter).limit(limit).skip(skip).sort()
         const countDocument = await ProductModel.countDocuments();
 
         res.status(200).json({
             success: true,
             message: "Product data found",
             data: product,
-            total: countDocument
+            total: countDocument,
+            limit,
+            pages: Math.ceil(countDocument / limit)
         });
 
     } catch (error) {
+        console.log(error)
         sendServerError(res);
     }
 };
@@ -109,7 +170,7 @@ export const create = async (req, res) => {
     }
 };
 
-import Product from "../models/product.model.js";
+
 
 export const addImages = async (req, res) => {
     try {
